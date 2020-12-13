@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fundamentals Part 3</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <p>Check Log For Output</p>
+
+    <script>
+        function add7(number) {
+            return number + 7;
+        }
+
+        function multiply(number1, number2) {
+            return (number1 * number2);
+        }
+
+        function capitalize(word) {
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+
+        function lastLetter(word) {
+            return word.charAt(word.length - 1);
+        }
+
+        console.log(`Expecting 21: ${add7(14)}`);
+        console.log(`Expecting 42: ${multiply(6, 7)}`);
+        console.log(`Expecting 'Word': ${capitalize("word")}`);
+        console.log(`Expecting 'Upper': ${capitalize("UPPER")}`);
+        console.log(`Expecting 'Camel': ${capitalize("cAmEl")}`);
+        console.log(`Expecting 'd': ${lastLetter("abcd")}`);
+
+    </script>
+</body>
+</html>
