@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        function computerPlay() {
+            let moves = ["rock", "paper", "scissors"];
+
+            return moves[Math.floor(Math.random() * 2)];
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            playerSelection = playerSelection.toLowerCase();
+            computerSelection = computerSelection.toLowerCase();
+
+            loseMessage = "You lose! ";
+            winMessage = "You win! ";
+
+            if(playerSelection === computerSelection) {
+                return "It was a tie!"
+            }
+
+            switch(playerSelection.toLowerCase()) {
+                case "rock":
+                    if(computerSelection === "paper") {
+                        return loseMessage + "Paper beats Rock";
+                    }
+                    else {
+                        return winMessage + "Rock beats Scissors";
+                    }
+                    break;
+                case "paper":
+                    if(computerSelection === "scissors") {
+                        return loseMessage + "Scissors beats Paper";
+                    }
+                    else {
+                        return winMessage + "Paper beats Rock";
+                    }
+                    break;
+                case "scissors":
+                    if(computerSelection === "rock") {
+                        return loseMessage + "Rock beats Scissors";
+                    }
+                    else {
+                        return winMessage + "Scissors beats Paper";
+                    }
+                    break;
+                default:
+                    return "Error";
+            }
+        }
+
+        function game() {
+            score = 0;
+
+            for(let i = 1; i <= 5; i++) {
+                playerSelection = prompt("Rock, Paper, or Scissors?").toLowerCase();
+                while (playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissors") {
+                    playerSelection = prompt("Invalid move. Please try again. Rock, Paper, or Scissors?");
+                }
+                
+                const computerSelection = computerPlay();
+                let result = playRound(playerSelection, computerSelection);
+                console.log(result);
+
+                if(result.indexOf("win") >= 0) {
+                    score++;
+                }
+            }
+
+            console.log(`Final score: ${score}`);
+        }
+
+        game();
+    </script>
+</body>
+</html>
