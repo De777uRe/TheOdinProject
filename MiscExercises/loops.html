@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+    <script>
+        for(let i = 2; i <=10; i++) {
+            if(i % 2 === 0) {
+                console.log(i);
+            }
+        }
+
+        i = 0;
+        while(i < 3) {
+            alert( `number ${i}!` );
+            i++;
+        }
+
+        while(true) {
+            let input = prompt("Enter number greater than 100");
+            if(parseInt(input) > 100) {
+                break;
+            }
+            if(!input) {
+                break;
+            }
+        }
+
+        let input = parseInt(prompt("Enter a number up to which to find primes"));
+        for(i = 2; i <= input; i++) {
+            let divisorFound = false;
+            for(let j = i-1; j >= 2; j--) {
+                if (i % j === 0) {
+                    divisorFound = true;
+                }
+            }
+            if(!divisorFound) {
+                console.log(i);
+            }
+        }
+    </script>
+</body>
+</html>
