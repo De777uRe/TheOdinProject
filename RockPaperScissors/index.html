@@ -3,16 +3,42 @@
 <head>
     <title>Page Title</title>
     <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <button id="rock" class=btn>Rock</button>
+    <button id="paper" class=btn>Paper</button>
+    <button id="scissors" class=btn>Scissors</button>
+
+    <div id="announcement">
+        <p> Rock, Paper, Scissors!</p>
+    </div>
+
+    <div id="result">
+        <p></p>
+    </div>
+
+    <div id="playerScore">
+        <p>You: 0</p>
+    </div>
+
+    <div id="computerScore">
+        <p>Computer: 0</p>
+    </div>
+
     <script>
-        function computerPlay() {
-            let moves = ["rock", "paper", "scissors"];
+        let playerScore = 0;
+        let computerScore = 0;
 
-            return moves[Math.floor(Math.random() * 2)];
-        }
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                playRound(button.id);
+            });
+        });
 
-        function playRound(playerSelection, computerSelection) {
+        function playRound(playerSelection) {
+            let computerSelection = computerPlay();
             playerSelection = playerSelection.toLowerCase();
             computerSelection = computerSelection.toLowerCase();
 
@@ -20,61 +46,67 @@
             winMessage = "You win! ";
 
             if(playerSelection === computerSelection) {
-                return "It was a tie!"
+                document.getElementById("result").textContent = "Tie!";
+                return;
             }
 
             switch(playerSelection.toLowerCase()) {
                 case "rock":
                     if(computerSelection === "paper") {
-                        return loseMessage + "Paper beats Rock";
+                        document.getElementById("result").textContent = loseMessage + "Paper beats Rock";
+                        computerScore++;
                     }
                     else {
-                        return winMessage + "Rock beats Scissors";
+                        document.getElementById("result").textContent = winMessage + "Rock beats Scissors";
+                        playerScore++;
                     }
                     break;
                 case "paper":
                     if(computerSelection === "scissors") {
-                        return loseMessage + "Scissors beats Paper";
+                        document.getElementById("result").textContent = loseMessage + "Scissors beats Paper";
+                        computerScore++;
                     }
                     else {
-                        return winMessage + "Paper beats Rock";
+                        document.getElementById("result").textContent = winMessage + "Paper beats Rock";
+                        playerScore++;
                     }
                     break;
                 case "scissors":
                     if(computerSelection === "rock") {
-                        return loseMessage + "Rock beats Scissors";
+                        document.getElementById("result").textContent = loseMessage + "Rock beats Scissors";
+                        computerScore++;
                     }
                     else {
-                        return winMessage + "Scissors beats Paper";
+                        document.getElementById("result").textContent = winMessage + "Scissors beats Paper";
+                        playerScore++;
                     }
                     break;
                 default:
-                    return "Error";
-            }
-        }
-
-        function game() {
-            score = 0;
-
-            for(let i = 1; i <= 5; i++) {
-                playerSelection = prompt("Rock, Paper, or Scissors?").toLowerCase();
-                while (playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissors") {
-                    playerSelection = prompt("Invalid move. Please try again. Rock, Paper, or Scissors?");
-                }
-                
-                const computerSelection = computerPlay();
-                let result = playRound(playerSelection, computerSelection);
-                console.log(result);
-
-                if(result.indexOf("win") >= 0) {
-                    score++;
-                }
+                    return
             }
 
-            console.log(`Final score: ${score}`);
+            if (playerScore === 5 || computerScore === 5) {
+                if(playerScore === 5) {
+                    document.getElementById("result").textContent = "You've beaten the computer!";
+                }
+
+                if(computerScore === 5) {
+                    document.getElementById("result").textContent = "The computer has beaten you!";
+                }
+
+                playerScore = 0;
+                computerScore = 0;
+            }
+
+            document.getElementById("playerScore").textContent = "You: " + parseInt(playerScore);
+            document.getElementById("computerScore").textContent = "Computer: " + parseInt(computerScore);
         }
 
-        game();
+        function computerPlay() {
+            let moves = ["rock", "paper", "scissors"];
+
+            return moves[Math.floor(Math.random() * 2)];
+        }
     </script>
 </body>
 </html>
